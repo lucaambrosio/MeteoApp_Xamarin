@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace MeteoApp
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace MeteoApp.Views
 {
-    public partial class MeteoListPage : ContentPage
-    {
-        public MeteoListPage()
-        {
-            InitializeComponent();
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class MeteoListPage : ContentPage
+	{
+		public MeteoListPage ()
+		{
+			InitializeComponent ();
             BindingContext = new MeteoListViewModel();
         }
 
@@ -31,7 +34,7 @@ namespace MeteoApp
             {
                 Navigation.PushAsync(new MeteoItemPage()
                 {
-                    BindingContext = e.SelectedItem as Entry
+                    BindingContext = new MeteoItemViewModel(e.SelectedItem as Entry)
                 });
             }
         }
