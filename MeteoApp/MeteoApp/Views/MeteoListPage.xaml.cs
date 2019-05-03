@@ -1,10 +1,15 @@
-﻿using MeteoApp.Views;
+﻿using Android.Webkit;
+using MeteoApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UIKit;
 using Xamarin.Forms;
+using Acr;
+using Acr.UserDialogs;
+using Android.Support.V7.App;
 
 namespace MeteoApp
 {
@@ -22,39 +27,42 @@ namespace MeteoApp
             base.OnAppearing();
         }
 
-        void addNewElement()
+        public async void addCity()
         {
-            //PromptResult pResult = await UserDialogs.Instance.PromptAsync(new PromptConfig
-            //{
-            //    InputType = InputType.Default,
-            //    OkText = "Add",
-            //    Title = "Add location",
-            //});
+            
+            PromptResult pResult = await UserDialogs.Instance.PromptAsync(new PromptConfig
+            {
+               InputType = InputType.Default,
+               OkText = "Add",
+               Title = "Add location",
+            });
 
-            //if (pResult.Ok && !string.IsNullOrWhiteSpace(pResult.Text))
-            //{
-            //    Location newLocation = new Location();
-            //    newLocation.Name = pResult.Text;
-            //    await GetWeatherAsyncFromName(newLocation);
-            //    if (newLocation.Weather != null)
-            //    {
-            //        Weather temp = newLocation.Weather;
-            //        newLocation.Weather = null;
-            //        ((MeteoListViewModel)BindingContext).addAndSave(newLocation);
-            //        newLocation.Weather = temp;
-            //    }
-            //}
+            if (pResult.Ok && !string.IsNullOrWhiteSpace(pResult.Text))
+            {
+                Location newLocation = new Location();
+                newLocation.Name = pResult.Text;
+                App.Database.SaveItemAsync(newLocation);
+                ((MeteoListViewModel)BindingContext).addLocation(newLocation);
+            }
         }
-        void OnItemAdded(object sender, EventArgs e)
+        async void OnItemAdded(object sender, EventArgs e)
         {
-            addNewElement();
-            Location location = new Location();
-            location.Name = "Varese";
-            App.Database.SaveItemAsync(location);
-            //((MeteoListViewModel)BindingContext).Entries.Add(location);
+            PromptResult pResult = await UserDialogs.Instance.PromptAsync(new PromptConfig
+            {
+                InputType = InputType.Default,
+                OkText = "Add",
+                Title = "Add location",
+            });
 
+            if (pResult.Ok && !string.IsNullOrWhiteSpace(pResult.Text))
+            {
+                Location newLocation = new Location();
+                newLocation.Name = pResult.Text;
 
+                 //App.Database.SaveItemAsync(newLocation);
 
+                ((MeteoListViewModel)BindingContext).addLocation(newLocation);
+            }
         }
 
         void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
