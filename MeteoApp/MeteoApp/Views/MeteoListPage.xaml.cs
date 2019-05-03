@@ -1,5 +1,4 @@
-﻿using Android.Webkit;
-using MeteoApp.Views;
+﻿using MeteoApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,8 @@ using UIKit;
 using Xamarin.Forms;
 using Acr;
 using Acr.UserDialogs;
-using Android.Support.V7.App;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace MeteoApp
 {
@@ -21,6 +21,22 @@ namespace MeteoApp
 
             BindingContext = new MeteoListViewModel();
         }
+
+
+
+
+
+        void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+            {
+                Navigation.PushAsync(new MeteoItemPage()
+                {
+                    BindingContext = new MeteoItemViewModel(e.SelectedItem as Entry)
+                });
+            }
+        }
+
 
         protected override void OnAppearing()
         {
@@ -45,6 +61,7 @@ namespace MeteoApp
                 ((MeteoListViewModel)BindingContext).addLocation(newLocation);
             }
         }
+
         async void OnItemAdded(object sender, EventArgs e)
         {
             PromptResult pResult = await UserDialogs.Instance.PromptAsync(new PromptConfig
@@ -65,15 +82,34 @@ namespace MeteoApp
             }
         }
 
-        void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
+  
+
+
+
+        public async Task<Entry> GetWeatherAsync(string Nome)
         {
-            if (e.SelectedItem != null)
+            var httpClient = new HttpClient();
+            Task<string> contentsTask = httpClient.GetStringAsync("https://api.openweathermap.org/data/2.5/weather?q=" + Nome + "&units=metric&appid=c200173e4aeed3198803206f96382afe");
+
+            var content = await contentsTask;
+            var Appoggio = new Entry
             {
-                Navigation.PushAsync(new MeteoItemPage()
-                {
-                    BindingContext = new MeteoItemViewModel(e.SelectedItem as Entry)
-                });
-            }
+                Lat = (double)JObject.Parse(content)["coord"]["lat"],
+                Lon = (double)JObject.Parse(content)["coord"]["lon"],
+                Description = (string)JObject.Parse(content)["weather"][0]["description"],
+                icon = "http://openweathermap.org/img/w/" + (string)JObject.Parse(content)["weather"][0]["icon"] + ".png",
+                ActualTemperature = (double)JObject.Parse(content)["main"]["temp"],
+                MinTemperature = (double)JObject.Parse(content)["main"]["temp_min"],
+                MaxTemperature = (double)JObject.Parse(content)["main"]["temp_max"],
+                Name = (string)JObject.Parse(content)["name"],
+                State = (string)JObject.Parse(content)["sys"]["country"]
+            };
+
+            return Appoggio;
         }
+
+
+
+       
     }
 }

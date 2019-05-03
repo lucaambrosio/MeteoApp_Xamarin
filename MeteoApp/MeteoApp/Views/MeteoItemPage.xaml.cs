@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 
 namespace MeteoApp.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+	
 	public partial class MeteoItemPage : ContentPage
 	{
 		public MeteoItemPage ()

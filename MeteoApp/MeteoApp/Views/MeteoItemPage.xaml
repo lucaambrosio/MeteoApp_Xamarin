@@ -3,20 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MeteoApp.Views.MeteoItemPage">
     <ContentPage.Content>
-        <RelativeLayout x:Name="container">
-            <Label Text="{Binding Entry.Name}" RelativeLayout.XConstraint="{ConstraintExpression 
-                        Type=RelativeToParent,
-                        Property=Width, 
-                        Factor=0.5,
-                        Constant=-25}"
-                   RelativeLayout.YConstraint=
-                "{ConstraintExpression 
-                        Type=RelativeToParent,
-                        Property=Height,
-                        Factor=0.5,
-                        Constant=-25}"
-                   
-            ></Label>
-        </RelativeLayout>
+
+        <StackLayout>
+
+
+            <Label HorizontalOptions="Center" Margin="50" FontSize="28">
+                <Label.FormattedText >
+                    <FormattedString >
+
+                        <Span Text="{Binding Entry.Name}"  />
+                        <Span Text=", " />
+                        <Span Text="{Binding Entry.State}" />
+
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Image Source="{Binding Entry.icon}"
+                   WidthRequest="200"
+                   HeightRequest="200"/>
+
+            <Label Text="{Binding Entry.Description}"
+                   HorizontalOptions="Center"
+                   Margin="10"/>
+
+            <Label Text="{Binding Entry.ActualTemperature, StringFormat='{0} C°'}"
+                   HorizontalOptions="Center"
+                   Margin="10"/>
+
+            <Label Text="{Binding Entry.MaxTemperature, StringFormat='{0} C°'}"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="{Binding Entry.MinTemperature, StringFormat='{0} C°'}"
+                   HorizontalOptions="Center"
+                   Margin="10"/>
+
+        </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

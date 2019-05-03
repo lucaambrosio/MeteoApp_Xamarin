@@ -10,7 +10,7 @@ namespace MeteoApp
 {
     public class MeteoListViewModel : BaseViewModel
     {
-        ObservableCollection<Entry> _entries;
+         ObservableCollection<Entry> _entries;
 
         public ObservableCollection<Entry> Entries
         {
@@ -27,6 +27,11 @@ namespace MeteoApp
             Entry entry = new Entry();
             entry.ID = location.ID;
             entry.Name = location.Name;
+            _entries.Add(entry);
+        }
+
+        public void addEntry(Entry entry)
+        {
             _entries.Add(entry);
         }
 
