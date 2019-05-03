@@ -20,5 +20,7 @@ namespace MeteoApp
         {
             Entry = entry;
         }
+
+
     }
 }

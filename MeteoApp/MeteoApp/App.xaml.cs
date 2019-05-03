@@ -11,14 +11,27 @@ namespace MeteoApp
         public App()
         {
             InitializeComponent();
+            
 
             var nav = new NavigationPage(new MeteoListPage())
             {
-                BarBackgroundColor = Color.LightGreen,
+                BarBackgroundColor = Color.FromHex("404040"),
                 BarTextColor = Color.White
             };
 
             MainPage = nav;
+            
+        }
+        static Database database;
+
+        public static Database Database
+        {
+            get
+            {
+                if (database == null) // se l'istanza è nulla, la creo
+                    database = new Database();
+                return database; // ritorno l'istanza
+            }
         }
 
         protected override void OnStart()
