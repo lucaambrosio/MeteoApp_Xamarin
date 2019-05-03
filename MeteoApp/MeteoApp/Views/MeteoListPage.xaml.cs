@@ -43,24 +43,7 @@ namespace MeteoApp
             base.OnAppearing();
         }
 
-        public async void addCity()
-        {
-            
-            PromptResult pResult = await UserDialogs.Instance.PromptAsync(new PromptConfig
-            {
-               InputType = InputType.Default,
-               OkText = "Add",
-               Title = "Add location",
-            });
-
-            if (pResult.Ok && !string.IsNullOrWhiteSpace(pResult.Text))
-            {
-                Location newLocation = new Location();
-                newLocation.Name = pResult.Text;
-                App.Database.SaveItemAsync(newLocation);
-                ((MeteoListViewModel)BindingContext).addLocation(newLocation);
-            }
-        }
+        
 
         async void OnItemAdded(object sender, EventArgs e)
         {
@@ -75,10 +58,9 @@ namespace MeteoApp
             {
                 Location newLocation = new Location();
                 newLocation.Name = pResult.Text;
-
-                 //App.Database.SaveItemAsync(newLocation);
-
-                ((MeteoListViewModel)BindingContext).addLocation(newLocation);
+                App.Database.SaveItemAsync(newLocation);
+                Entry en = await GetWeatherAsync(newLocation.Name);
+                ((MeteoListViewModel)BindingContext).addEntry(en);
             }
         }
 
