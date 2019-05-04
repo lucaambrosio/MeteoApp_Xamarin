@@ -12,7 +12,7 @@ namespace MeteoApp
 
         public Database()
         {
-            var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TestSQLite.db3");
+            var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LocationsSQLite.db3");
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<Location>().Wait();
         }
@@ -30,7 +30,7 @@ namespace MeteoApp
          */
         public Task<List<Location>> GetItemsWithWhere(int id)
         {
-            return database.QueryAsync<Location>("SELECT * FROM [TestItem] WHERE [ID] =?", id);
+            return database.QueryAsync<Location>("SELECT * FROM [Location] WHERE [ID] =?", id);
         }
 
         /*
@@ -46,7 +46,7 @@ namespace MeteoApp
          */
         public Task<int> SaveItemAsync(Location item)
         {
-            if (item.ID == 0) // esempio
+            if (item.ID == 0) 
                 return database.UpdateAsync(item);
 
             return database.InsertAsync(item);
@@ -55,6 +55,14 @@ namespace MeteoApp
         public Task<int> DeleteItemAsync(Location item)
         {
             return database.DeleteAsync(item);
+        }
+        public Task<int> InsertItemAsync(Location location)
+        {
+            return database.InsertAsync(location);
+        }
+        public Task<int> UpdateItemAsync(Location location)
+        {
+            return database.UpdateAsync(location);
         }
     }
 }

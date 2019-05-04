@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MeteoApp.Views.MeteoItemPage">
+             x:Class="MeteoApp.Views.MeteoItemPage"
+             BackgroundImage="background.jpeg">
     <ContentPage.Content>
 
         <StackLayout>
 
 
-            <Label HorizontalOptions="Center" Margin="50" FontSize="28">
+            <Label HorizontalOptions="Center" Margin="50" FontSize="28" LineBreakMode="NoWrap">
                 <Label.FormattedText >
                     <FormattedString >
 
@@ -23,20 +24,29 @@
                    WidthRequest="200"
                    HeightRequest="200"/>
 
-            <Label Text="{Binding Entry.Description}"
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Opacity="0.7" Margin="0" BackgroundColor="#D3D3D3" WidthRequest="1500" HeightRequest="50">
+             <Label FontSize="Medium" Text="{Binding Entry.Description}"
                    HorizontalOptions="Center"
-                   Margin="10"/>
+                   Margin="100,10,10,0" TextColor="Black"/>
+            </StackLayout>
 
-            <Label Text="{Binding Entry.ActualTemperature, StringFormat='{0} C°'}"
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Opacity="0.7" Margin="0" BackgroundColor="#D3D3D3" WidthRequest="1500" HeightRequest="50">
+                
+                <Label FontSize="Medium" Text="{Binding Entry.MinTemperature, StringFormat='{0} C°'}"
                    HorizontalOptions="Center"
-                   Margin="10"/>
+                   Margin="60,0,0,0" TextColor="Black"/>
 
-            <Label Text="{Binding Entry.MaxTemperature, StringFormat='{0} C°'}"
-                   HorizontalOptions="Center"/>
-
-            <Label Text="{Binding Entry.MinTemperature, StringFormat='{0} C°'}"
+           
+                <Label Text="{Binding Entry.ActualTemperature, StringFormat='{0} C°'}"
                    HorizontalOptions="Center"
-                   Margin="10"/>
+                   Margin="10,0,0,10" FontSize="Medium" TextColor="Black"/>
+                
+                <Label Text="{Binding Entry.MaxTemperature, StringFormat='{0} C°'}"
+                   HorizontalOptions="Center" Margin="10,0,0,10" FontSize="Medium" TextColor="Black"/>
+            </StackLayout>
+
+            
 
         </StackLayout>
 

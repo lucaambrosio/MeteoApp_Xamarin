@@ -1,20 +1,22 @@
 ﻿using MeteoApp.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using System.Threading.Tasks;
-using UIKit;
+
 using Xamarin.Forms;
 using Acr;
 using Acr.UserDialogs;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using System.Collections;
 
 namespace MeteoApp
 {
     public partial class MeteoListPage : ContentPage
+
+
     {
+        public static  ArrayList locations = null;
         public MeteoListPage()
         {
             InitializeComponent();
@@ -41,6 +43,25 @@ namespace MeteoApp
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            if (locations == null)
+            {
+                locations = new ArrayList();
+                locations.AddRange(App.Database.GetItemsAsync().Result.ToArray());
+                populateDatabase();
+
+
+            }
+        }
+
+        async void populateDatabase()
+        {
+                foreach(Location location in locations)
+                {
+                    Entry en = await GetWeatherAsync(location.Name);
+                    ((MeteoListViewModel)BindingContext).addEntry(en);
+                 
+                }
         }
 
         
@@ -57,10 +78,10 @@ namespace MeteoApp
             if (pResult.Ok && !string.IsNullOrWhiteSpace(pResult.Text))
             {
                 Location newLocation = new Location();
-                newLocation.Name = pResult.Text;
-                App.Database.SaveItemAsync(newLocation);
+                newLocation.Name = pResult.Text;               
                 Entry en = await GetWeatherAsync(newLocation.Name);
                 ((MeteoListViewModel)BindingContext).addEntry(en);
+                _=App.Database.InsertItemAsync(newLocation);
             }
         }
 
