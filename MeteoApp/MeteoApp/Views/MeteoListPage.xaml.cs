@@ -108,11 +108,7 @@ namespace MeteoApp
                 Name = (string)JObject.Parse(content)["name"],
                 State = (string)JObject.Parse(content)["sys"]["country"]
             };
-            if(Appoggio.ActualTemperature > 0)
-            {
-                FirebasePushNotificationManager f;
-                f.
-            }
+            
 
             return Appoggio;
         }
