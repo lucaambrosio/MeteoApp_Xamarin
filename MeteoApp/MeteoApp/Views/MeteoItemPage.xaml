@@ -7,6 +7,7 @@
 
         <StackLayout>
 
+            
 
             <Label HorizontalOptions="Center" Margin="50" FontSize="28" LineBreakMode="NoWrap">
                 <Label.FormattedText >

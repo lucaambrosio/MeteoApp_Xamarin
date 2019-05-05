@@ -9,6 +9,7 @@ using Acr.UserDialogs;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using System.Collections;
+using Plugin.FirebasePushNotification;
 
 namespace MeteoApp
 {
@@ -107,6 +108,11 @@ namespace MeteoApp
                 Name = (string)JObject.Parse(content)["name"],
                 State = (string)JObject.Parse(content)["sys"]["country"]
             };
+            if(Appoggio.ActualTemperature > 0)
+            {
+                FirebasePushNotificationManager f;
+                f.
+            }
 
             return Appoggio;
         }

@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1035075882115",
-    "firebase_url": "https://meteoapp-ca19e.firebaseio.com",
-    "project_id": "meteoapp-ca19e",
-    "storage_bucket": "meteoapp-ca19e.appspot.com"
+    "project_number": "99823201171",
+    "firebase_url": "https://meteoapp-ecef5.firebaseio.com",
+    "project_id": "meteoapp-ecef5",
+    "storage_bucket": "meteoapp-ecef5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1035075882115:android:e4745cb6be4e6620",
+        "mobilesdk_app_id": "1:99823201171:android:e4745cb6be4e6620",
         "android_client_info": {
           "package_name": "com.companyname.MeteoApp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1035075882115-crft6p92itohhvbcltv2nvkvsmm7377f.apps.googleusercontent.com",
+          "client_id": "99823201171-7ndbilvo2c6v02sicu8on20mmfm1va2l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDFINSTwExnSyPdpFIVq7hgjszApYQtcHA"
+          "current_key": "AIzaSyBZx4XEK057pSnDs7M-0i9GATmuvw56Dhk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1035075882115-crft6p92itohhvbcltv2nvkvsmm7377f.apps.googleusercontent.com",
+              "client_id": "99823201171-7ndbilvo2c6v02sicu8on20mmfm1va2l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

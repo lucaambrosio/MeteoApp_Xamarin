@@ -3,6 +3,10 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Push;
+
+
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MeteoApp
 {
@@ -36,6 +40,7 @@ namespace MeteoApp
 
         protected override void OnStart()
         {
+            AppCenter.Start("14ff4df1-0140-4bc2-92bc-c70be456636a", typeof(Push));
             // Handle when your app starts
         }
 
